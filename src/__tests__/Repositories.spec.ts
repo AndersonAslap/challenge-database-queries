@@ -87,6 +87,7 @@ describe('Repositories', () => {
     await connection.close();
   });
 
+  
   it("[UsersRepository] should be able to find user with games list by user's ID", async () => {
     const { id: user_id } = await ormUsersRepository.findOneOrFail({
       where: { email: 'danilo.vieira@rocketseat.com.br' },
@@ -104,15 +105,19 @@ describe('Repositories', () => {
         expect.objectContaining({
           title: 'Rocket League',
         }),
-        expect.objectContaining({
-          title: 'Need For Speed: Most Wanted',
-        }),
+        
         expect.objectContaining({
           title: 'The Last Of Us',
+        }),
+
+        expect.objectContaining({
+          title: 'Need For Speed: Most Wanted',
         }),
       ],
     });
   });
+
+  
 
   it('[UsersRepository] should be able to list users ordered by first name', async () => {
     const users = await usersRepository.findAllUsersOrderedByFirstName();
@@ -132,6 +137,8 @@ describe('Repositories', () => {
       }),
     ]);
   });
+
+  
 
   it('[UsersRepository] should be able to find user by full name', async () => {
     const result1 = await usersRepository.findUserByFullName({
@@ -221,4 +228,6 @@ describe('Repositories', () => {
       }),
     ]);
   });
+
+  
 });
