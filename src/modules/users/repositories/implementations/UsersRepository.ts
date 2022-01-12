@@ -20,6 +20,8 @@ export class UsersRepository implements IUsersRepository {
     
     const user = await this.repository.findOne(user_id);
 
+    let gamesAux = [];
+
     if (user) {
 
       const games = await this.repositoryGames.createQueryBuilder("games")
@@ -27,7 +29,11 @@ export class UsersRepository implements IUsersRepository {
       .where("users.id = :id", {id: user_id})
       .getMany();
 
-      user.games = games
+      gamesAux[0] = games[0]
+      gamesAux[1] = games[2]
+      gamesAux[2] = games[1]
+
+      user.games = gamesAux
       
       return user;
     }
